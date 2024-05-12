@@ -8,6 +8,7 @@ TagManager:
   - Health
   - Ammo
   - Snail
+  - Ground
   layers:
   - Default
   - TransparentFX
