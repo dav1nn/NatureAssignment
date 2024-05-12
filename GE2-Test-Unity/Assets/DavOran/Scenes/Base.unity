@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: "\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snailPrefab: {fileID: 741590817}
   snailParent: {fileID: 741590821}
-  snailCountInputField: {fileID: 0}
+  snailCountInputField: {fileID: 1019797861}
   snails: []
 --- !u!4 &555702958
 Transform:
@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 741590819}
   - component: {fileID: 741590818}
   - component: {fileID: 741590822}
+  - component: {fileID: 741590823}
   m_Layer: 0
   m_Name: Snail
   m_TagString: Untagged
@@ -751,6 +752,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &741590823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741590817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6552ea908308034e8dccbc1ff986fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 741590822}
+  roamRadius: 20
+  roamDelay: 2
 --- !u!1 &1019797859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1142,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1488588194}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555702957}
+        m_TargetAssemblyTypeName: SnailManager, Assembly-CSharp
+        m_MethodName: RemoveSnail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1488588194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,13 +1549,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722929673}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.24081942, y: -0, z: -0, w: 0.9705699}
+  m_LocalPosition: {x: 0, y: 19.49, z: -53.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.87, y: 0, z: 0}
 --- !u!1 &1771463745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1772,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1828660949}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555702957}
+        m_TargetAssemblyTypeName: SnailManager, Assembly-CSharp
+        m_MethodName: AddSnail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1828660949
 MonoBehaviour:
   m_ObjectHideFlags: 0
