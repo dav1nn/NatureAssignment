@@ -3,40 +3,35 @@ using UnityEngine.AI;
 
 public class SnailController : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public float roamRadius = 20f;
-    public float roamDelay = 2f;
-
-    private float roamTimer;
+    private NavMeshAgent agent;
+    private float wanderRadius = 5f;
+    private float wanderTimer = 2f;
+    private float timer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        roamTimer = roamDelay;
+        timer = wanderTimer;
     }
 
     void Update()
     {
-        roamTimer += Time.deltaTime;
+        timer += Time.deltaTime;
 
-        if (roamTimer >= roamDelay)
+        if (timer >= wanderTimer)
         {
-            Vector3 newDestination = RandomNavMeshLocation(roamRadius);
-            agent.SetDestination(newDestination);
-            roamTimer = 0;
+            Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+            agent.SetDestination(newPos);
+            timer = 0;
         }
     }
 
-    public Vector3 RandomNavMeshLocation(float radius)
+    public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
-        NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
-        {
-            finalPosition = hit.position;
-        }
-        return finalPosition;
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+        randDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+        return navHit.position;
     }
 }
