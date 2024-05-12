@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ public class SnailManager : MonoBehaviour
     {
         if (int.TryParse(snailInputField.text, out int inputCount))
         {
-            inputCount = Mathf.Max(0, inputCount);  
+            inputCount = Mathf.Max(0, inputCount); 
             UpdateSnailCount(inputCount);
         }
         UpdateSnailCountDisplay();
@@ -51,7 +52,7 @@ public class SnailManager : MonoBehaviour
         {
             for (int i = currentCount; i < newCount; i++)
             {
-                GameObject snail = Instantiate(snailPrefab, GetRandomPosition(), Quaternion.identity);
+                GameObject snail = Instantiate(snailPrefab, RandomNavMeshLocation(), Quaternion.identity);
                 snails.Add(snail);
             }
         }
@@ -74,8 +75,15 @@ public class SnailManager : MonoBehaviour
         snailInputField.text = snails.Count.ToString();
     }
 
-    Vector3 GetRandomPosition()
+    Vector3 RandomNavMeshLocation()
     {
-        return new Vector3(Random.Range(-5, 5), 0.25f, Random.Range(-5, 5));
+        NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+        int t = Random.Range(0, navMeshData.indices.Length / 3);
+        Vector3 point = Vector3.Lerp(
+            navMeshData.vertices[navMeshData.indices[t * 3]],
+            navMeshData.vertices[navMeshData.indices[t * 3 + 1]],
+            Random.value);
+        point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[t * 3 + 2]], Random.value);
+        return point;
     }
 }
