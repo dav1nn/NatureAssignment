@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class SnailManager : MonoBehaviour
 {
@@ -9,65 +10,72 @@ public class SnailManager : MonoBehaviour
     public Button addButton;
     public Button removeButton;
 
+    private List<GameObject> snails = new List<GameObject>();
+
     void Start()
     {
-        addButton.onClick.AddListener(() => UpdateSnailCount(1));
-        removeButton.onClick.AddListener(() => UpdateSnailCount(-1));
-        snailInputField.onValueChanged.AddListener(delegate { ValidateInput(); });
-        UpdateSnailDisplay();
+        addButton.onClick.AddListener(() => ModifySnailCount(1));
+        removeButton.onClick.AddListener(() => ModifySnailCount(-1));
+        snailInputField.onEndEdit.AddListener(delegate { ValidateInput(); });
+
+        InitializeSnails();
     }
 
-    void UpdateSnailCount(int increment)
+    void InitializeSnails()
     {
-        int currentCount = GetCurrentSnailCount();
-        int newCount = Mathf.Max(0, currentCount + increment);  
-        if (newCount != currentCount)
+        ModifySnailCount(1);
+    }
+
+    void ModifySnailCount(int increment)
+    {
+        int newCount = Mathf.Max(0, snails.Count + increment);
+        UpdateSnailCount(newCount);
+        UpdateSnailCountDisplay();
+    }
+
+    void ValidateInput()
+    {
+        if (int.TryParse(snailInputField.text, out int inputCount))
         {
-            SetSnailCount(newCount);
+            inputCount = Mathf.Max(0, inputCount);  
+            UpdateSnailCount(inputCount);
         }
-        UpdateSnailDisplay();
+        UpdateSnailCountDisplay();
     }
 
-    void SetSnailCount(int count)
+    void UpdateSnailCount(int newCount)
     {
-        GameObject[] snails = GameObject.FindGameObjectsWithTag("Snail");
-        int currentCount = snails.Length;
+        int currentCount = snails.Count;
 
-        if (count > currentCount)
+        if (newCount > currentCount)
         {
-            for (int i = currentCount; i < count; i++)
+            for (int i = currentCount; i < newCount; i++)
             {
-                Instantiate(snailPrefab, new Vector3(Random.Range(-5, 5), 0.25f, Random.Range(-5, 5)), Quaternion.identity);
+                GameObject snail = Instantiate(snailPrefab, GetRandomPosition(), Quaternion.identity);
+                snails.Add(snail);
             }
         }
-        else if (count < currentCount)
+        else if (newCount < currentCount)
         {
-            for (int i = count; i < currentCount; i++)
+            for (int i = currentCount - 1; i >= newCount; i--)
             {
-                if (i < snails.Length) 
+                if (snails.Count > 0 && i < snails.Count)
                 {
-                    Destroy(snails[i]);
+                    GameObject snailToRemove = snails[i];
+                    snails.RemoveAt(i);
+                    Destroy(snailToRemove);
                 }
             }
         }
     }
 
-    void ValidateInput()
+    void UpdateSnailCountDisplay()
     {
-        if (int.TryParse(snailInputField.text, out int number))
-        {
-            SetSnailCount(number);
-            UpdateSnailDisplay();
-        }
+        snailInputField.text = snails.Count.ToString();
     }
 
-    void UpdateSnailDisplay()
+    Vector3 GetRandomPosition()
     {
-        snailInputField.text = GetCurrentSnailCount().ToString();
-    }
-
-    int GetCurrentSnailCount()
-    {
-        return GameObject.FindGameObjectsWithTag("Snail").Length;
+        return new Vector3(Random.Range(-5, 5), 0.25f, Random.Range(-5, 5));
     }
 }
