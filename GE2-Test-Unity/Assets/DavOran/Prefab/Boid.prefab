@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1040d8f87e345e47995a3864c2ee2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  rotationSpeed: 4
-  neighborDistance: 6
-  separationDistance: 3
+  speed: 0.3
+  rotationSpeed: 10
+  neighbourDistance: 0.4
+  separationDistance: 6
   obstacleAvoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2

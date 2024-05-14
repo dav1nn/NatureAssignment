@@ -7,6 +7,7 @@ public class BoidSpawner : MonoBehaviour
     public GameObject boidPrefab;
     public int boidCount = 20;
     public Vector3 spawnArea = new Vector3(10, 10, 10);
+    public BoidController boidController;
 
     void Start()
     {
@@ -19,6 +20,16 @@ public class BoidSpawner : MonoBehaviour
             );
 
             Instantiate(boidPrefab, spawnPosition, Quaternion.identity);
+        }
+
+       
+        if (boidController != null)
+        {
+            boidController.RefreshBoidList();
+        }
+        else
+        {
+            Debug.LogError("BoidController not set in BoidSpawner");
         }
     }
 }

@@ -6,7 +6,7 @@ public class Boid : MonoBehaviour
 {
     public float speed = 5.0f;
     public float rotationSpeed = 2.0f;
-    public float neighborDistance = 3.0f;
+    public float neighbourDistance = 3.0f;
     public float separationDistance = 1.5f;
     public float obstacleAvoidanceDistance = 5.0f;
     public LayerMask obstacleLayer;
@@ -30,14 +30,14 @@ public class Boid : MonoBehaviour
         Vector3 separation = Vector3.zero;
         Vector3 alignment = Vector3.zero;
         Vector3 cohesion = Vector3.zero;
-        int neighborCount = 0;
+        int neighbourCount = 0;
 
         foreach (Boid boid in FindObjectsOfType<Boid>())
         {
             if (boid == this) continue;
 
             float distance = Vector3.Distance(transform.position, boid.transform.position);
-            if (distance < neighborDistance)
+            if (distance < neighbourDistance)
             {
                 
                 if (distance < separationDistance)
@@ -51,15 +51,15 @@ public class Boid : MonoBehaviour
         
                 cohesion += boid.transform.position;
 
-                neighborCount++;
+                neighbourCount++;
             }
         }
 
-        if (neighborCount > 0)
+        if (neighbourCount > 0)
         {
-            separation /= neighborCount;
-            alignment /= neighborCount;
-            cohesion = (cohesion / neighborCount - transform.position).normalized;
+            separation /= neighbourCount;
+            alignment /= neighbourCount;
+            cohesion = (cohesion / neighbourCount - transform.position).normalized;
 
             direction += separation * separationDistance + alignment + cohesion;
             direction = Vector3.Lerp(transform.forward, direction, rotationSpeed * Time.deltaTime).normalized;
