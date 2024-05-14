@@ -11,11 +11,19 @@ public class Boid : MonoBehaviour
     public float obstacleAvoidanceDistance = 5.0f;
     public LayerMask obstacleLayer;
 
-    private Vector3 direction;
+    private Vector3 _direction;
+    public Vector3 direction 
+    { 
+        get { return _direction; } 
+        set { _direction = value.normalized; }
+    }
+
+    private float changeDirectionInterval = 5.0f; 
+    private float lastDirectionChangeTime = 0;
 
     void Start()
     {
-        direction = transform.forward;
+        _direction = transform.forward;
     }
 
     void Update()
@@ -23,6 +31,13 @@ public class Boid : MonoBehaviour
         ApplyBoidRules();
         ObstacleAvoidance();
         MoveBoid();
+
+       
+        if (Time.time - lastDirectionChangeTime > changeDirectionInterval)
+        {
+            ChangeRandomDirection();
+            lastDirectionChangeTime = Time.time;
+        }
     }
 
     void ApplyBoidRules()
@@ -39,12 +54,10 @@ public class Boid : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, boid.transform.position);
                 if (distance < neighbourDistance)
                 {
-                    
                     if (distance < separationDistance)
                     {
                         separationVector += (transform.position - boid.transform.position) / (distance * distance);
                     }
-
                     alignmentVector += boid.direction;
                     cohesionVector += boid.transform.position;
                     neighbourCount++;
@@ -57,7 +70,6 @@ public class Boid : MonoBehaviour
             separationVector /= neighbourCount;
             alignmentVector /= neighbourCount;
             cohesionVector = (cohesionVector / neighbourCount - transform.position).normalized;
-
             
             direction += (separationVector * 1.5f + alignmentVector * 1.0f + cohesionVector * 1.0f);
             direction = Vector3.Lerp(transform.forward, direction.normalized, rotationSpeed * Time.deltaTime);
@@ -80,13 +92,9 @@ public class Boid : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-    void OnDrawGizmos()
+    void ChangeRandomDirection()
     {
-       
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + direction * 5); 
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, neighbourDistance); 
-}
+        Vector3 randomDirection = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+        direction += randomDirection.normalized * 0.1f; 
+    }
 }
