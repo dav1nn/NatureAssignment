@@ -27,42 +27,40 @@ public class Boid : MonoBehaviour
 
     void ApplyBoidRules()
     {
-        Vector3 separation = Vector3.zero;
-        Vector3 alignment = Vector3.zero;
-        Vector3 cohesion = Vector3.zero;
+        Vector3 separationVector = Vector3.zero;
+        Vector3 alignmentVector = Vector3.zero;
+        Vector3 cohesionVector = Vector3.zero;
         int neighbourCount = 0;
 
         foreach (Boid boid in FindObjectsOfType<Boid>())
         {
-            if (boid == this) continue;
-
-            float distance = Vector3.Distance(transform.position, boid.transform.position);
-            if (distance < neighbourDistance)
+            if (boid != this)
             {
-                
-                if (distance < separationDistance)
+                float distance = Vector3.Distance(transform.position, boid.transform.position);
+                if (distance < neighbourDistance)
                 {
-                    separation += (transform.position - boid.transform.position) / distance;
+                    
+                    if (distance < separationDistance)
+                    {
+                        separationVector += (transform.position - boid.transform.position) / (distance * distance);
+                    }
+
+                    alignmentVector += boid.direction;
+                    cohesionVector += boid.transform.position;
+                    neighbourCount++;
                 }
-
-               
-                alignment += boid.direction;
-
-        
-                cohesion += boid.transform.position;
-
-                neighbourCount++;
             }
         }
 
         if (neighbourCount > 0)
         {
-            separation /= neighbourCount;
-            alignment /= neighbourCount;
-            cohesion = (cohesion / neighbourCount - transform.position).normalized;
+            separationVector /= neighbourCount;
+            alignmentVector /= neighbourCount;
+            cohesionVector = (cohesionVector / neighbourCount - transform.position).normalized;
 
-            direction += separation * separationDistance + alignment + cohesion;
-            direction = Vector3.Lerp(transform.forward, direction, rotationSpeed * Time.deltaTime).normalized;
+            
+            direction += (separationVector * 1.5f + alignmentVector * 1.0f + cohesionVector * 1.0f);
+            direction = Vector3.Lerp(transform.forward, direction.normalized, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -81,4 +79,14 @@ public class Boid : MonoBehaviour
         transform.forward = Vector3.Slerp(transform.forward, direction, rotationSpeed * Time.deltaTime);
         transform.position += transform.forward * speed * Time.deltaTime;
     }
+
+    void OnDrawGizmos()
+    {
+       
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + direction * 5); 
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, neighbourDistance); 
+}
 }
