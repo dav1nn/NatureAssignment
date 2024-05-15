@@ -76,7 +76,7 @@ public class Boid : MonoBehaviour
             alignmentVector /= neighbourCount;
             cohesionVector = (cohesionVector / neighbourCount - transform.position).normalized;
 
-            
+           
             direction += (separationVector * 1.5f + alignmentVector * 1.0f + cohesionVector * 2.0f);
             direction = direction.normalized;
         }
@@ -94,6 +94,7 @@ public class Boid : MonoBehaviour
 
     void MoveBoid()
     {
+       
         transform.forward = Vector3.Slerp(transform.forward, direction, rotationSpeed * Time.deltaTime);
         transform.position += transform.forward * speed * Time.deltaTime;
     }
@@ -128,5 +129,6 @@ public class Boid : MonoBehaviour
         direction += randomDirection.normalized * 0.1f;
     }
 }
+
 
 
