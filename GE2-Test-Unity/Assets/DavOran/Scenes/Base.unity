@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e151486184c84d40b04b4f954dbb2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boidPrefab: {fileID: 6819306800195406219, guid: 49e3d6ce479037e43a22b2dc353b2514,
+  boidPrefab: {fileID: 4081301307493490595, guid: c62ec85f284549d4b95c6540cd92c9e6,
     type: 3}
-  boidCount: 20
+  boidCount: 200
   spawnArea: {x: 10, y: 10, z: 10}
   boidController: {fileID: 427074618}
 --- !u!4 &30070179
