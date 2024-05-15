@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class LightIntensityController : MonoBehaviour
 {
     public Light directionalLight; 
-    public Slider intensitySlider; 
+     public Slider intensitySlider;  
+      public Light[] additionalLights; 
 
     void Start()
     {
@@ -14,17 +15,31 @@ public class LightIntensityController : MonoBehaviour
         if (intensitySlider != null && directionalLight != null)
         {
             intensitySlider.value = directionalLight.intensity;
-            intensitySlider.onValueChanged.AddListener(UpdateLightIntensity);
+            intensitySlider.onValueChanged.AddListener(UpdateLightSettings);
         }
+
+        UpdateAdditionalLights(intensitySlider.value);
     }
 
-    
-    public void UpdateLightIntensity(float value)
+    public void UpdateLightSettings(float value)
     {
         if (directionalLight != null)
         {
             directionalLight.intensity = value;
         }
+
+        UpdateAdditionalLights(value);
+    }
+
+    private void UpdateAdditionalLights(float sliderValue)
+    {
+        bool turnOn = sliderValue < 0.5f;
+
+        foreach (Light light in additionalLights)
+        {
+            light.enabled = turnOn;
+        }
     }
 }
+
 
