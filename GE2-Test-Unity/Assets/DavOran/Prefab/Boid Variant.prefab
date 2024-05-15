@@ -111,17 +111,17 @@ PrefabInstance:
     - target: {fileID: 994170081445590623, guid: 49e3d6ce479037e43a22b2dc353b2514,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.27046487
+      value: 0.4038311
       objectReference: {fileID: 0}
     - target: {fileID: 994170081445590623, guid: 49e3d6ce479037e43a22b2dc353b2514,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.044309262
+      value: 0.06615816
       objectReference: {fileID: 0}
     - target: {fileID: 994170081445590623, guid: 49e3d6ce479037e43a22b2dc353b2514,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1676071
+      value: 1.7433542
       objectReference: {fileID: 0}
     - target: {fileID: 994170081445590623, guid: 49e3d6ce479037e43a22b2dc353b2514,
         type: 3}
@@ -177,6 +177,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679400342985438544, guid: 49e3d6ce479037e43a22b2dc353b2514,
+        type: 3}
+      propertyPath: circleRadius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679400342985438544, guid: 49e3d6ce479037e43a22b2dc353b2514,
+        type: 3}
+      propertyPath: bankingAmount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679400342985438544, guid: 49e3d6ce479037e43a22b2dc353b2514,
+        type: 3}
+      propertyPath: neighbourDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6819306800195406219, guid: 49e3d6ce479037e43a22b2dc353b2514,
         type: 3}
