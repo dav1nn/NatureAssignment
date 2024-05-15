@@ -132,4 +132,6 @@ MonoBehaviour:
   obstacleAvoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  circleRadius: 50
+  circleCenter: {x: 0, y: 0, z: 0}

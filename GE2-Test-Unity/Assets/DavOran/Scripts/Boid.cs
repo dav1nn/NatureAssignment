@@ -10,29 +10,32 @@ public class Boid : MonoBehaviour
     public float separationDistance = 1.5f;
     public float obstacleAvoidanceDistance = 5.0f;
     public LayerMask obstacleLayer;
-
+    public float circleRadius = 50.0f;      public Vector3 circleCenter = Vector3.zero;  
     private Vector3 _direction;
+    private float angle;  
+
     public Vector3 direction 
     { 
         get { return _direction; } 
         set { _direction = value.normalized; }
     }
 
-    private float changeDirectionInterval = 5.0f; 
+    private float changeDirectionInterval = 5.0f;
     private float lastDirectionChangeTime = 0;
 
     void Start()
     {
         _direction = transform.forward;
+        angle = Random.Range(0.0f, 360.0f); 
     }
 
     void Update()
     {
         ApplyBoidRules();
         ObstacleAvoidance();
+        FlyInCircle();  
         MoveBoid();
 
-       
         if (Time.time - lastDirectionChangeTime > changeDirectionInterval)
         {
             ChangeRandomDirection();
@@ -70,7 +73,6 @@ public class Boid : MonoBehaviour
             separationVector /= neighbourCount;
             alignmentVector /= neighbourCount;
             cohesionVector = (cohesionVector / neighbourCount - transform.position).normalized;
-            
             direction += (separationVector * 1.5f + alignmentVector * 1.0f + cohesionVector * 1.0f);
             direction = Vector3.Lerp(transform.forward, direction.normalized, rotationSpeed * Time.deltaTime);
         }
@@ -92,9 +94,23 @@ public class Boid : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
+    void FlyInCircle()
+    {
+        angle += speed * Time.deltaTime;  
+        if (angle >= 360.0f) angle -= 360.0f; 
+
+        
+        float x = Mathf.Cos(angle * Mathf.Deg2Rad) * circleRadius + circleCenter.x;
+        float z = Mathf.Sin(angle * Mathf.Deg2Rad) * circleRadius + circleCenter.z;
+        Vector3 newPos = new Vector3(x, transform.position.y, z);  
+        
+        
+        direction = (newPos - transform.position).normalized;
+    }
+
     void ChangeRandomDirection()
     {
         Vector3 randomDirection = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-        direction += randomDirection.normalized * 0.1f; 
+        direction += randomDirection.normalized * 0.1f;
     }
 }
