@@ -14,6 +14,7 @@ public class Boid : MonoBehaviour
     public Vector3 circleCenter = Vector3.zero;
     private Vector3 _direction;
     private float angle;
+    public float bankingAmount = 30.0f; 
 
     public Vector3 direction 
     { 
@@ -75,8 +76,6 @@ public class Boid : MonoBehaviour
             separationVector /= neighbourCount;
             alignmentVector /= neighbourCount;
             cohesionVector = (cohesionVector / neighbourCount - transform.position).normalized;
-
-           
             direction += (separationVector * 1.5f + alignmentVector * 1.0f + cohesionVector * 2.0f);
             direction = direction.normalized;
         }
@@ -94,8 +93,14 @@ public class Boid : MonoBehaviour
 
     void MoveBoid()
     {
-       
-        transform.forward = Vector3.Slerp(transform.forward, direction, rotationSpeed * Time.deltaTime);
+        
+        Vector3 cross = Vector3.Cross(transform.forward, direction);
+        float bank = cross.y * bankingAmount;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        targetRotation *= Quaternion.Euler(0, 0, -bank); 
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
@@ -129,6 +134,7 @@ public class Boid : MonoBehaviour
         direction += randomDirection.normalized * 0.1f;
     }
 }
+
 
 
 
