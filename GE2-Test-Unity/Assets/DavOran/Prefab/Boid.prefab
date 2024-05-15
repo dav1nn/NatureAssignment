@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.3
-  rotationSpeed: 10
+  rotationSpeed: 200
   neighbourDistance: 0.4
-  separationDistance: 6
+  separationDistance: 10
   obstacleAvoidanceDistance: 10
   obstacleLayer:
     serializedVersion: 2
