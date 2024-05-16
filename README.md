@@ -43,6 +43,9 @@ The birds are boids, which model the flocking behavior of birds seen in nature. 
 | LightIntensityController.cs | Self written |
 | SnailController.cs | Self written |
 | SnailManager.cs | Self written |
+| ToggleUI.cs | Self written |
+| CameraOribit.cs | Self written |
+
 
 # References
 * https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633
