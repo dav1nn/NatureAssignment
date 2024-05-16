@@ -52,6 +52,7 @@ The birds are boids, which model the flocking behavior of birds seen in nature. 
 * https://www.youtube.com/watch?v=6dJlhv3hfQ0&t=84s
 * https://assetstore.unity.com/packages/3d/environments/lowpoly-environment-nature-free-medieval-fantasy-series-187052
 * https://assetstore.unity.com/packages/tools/particles-effects/lowpoly-water-107563
+* https://www.youtube.com/watch?v=vBi8FxvoYvo
 
 
 
