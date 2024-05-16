@@ -13,6 +13,9 @@ TU984
 
 Video: https://youtu.be/PVrgNuXmDBo
 
+![image (1)](https://github.com/dav1nn/NatureAssignment/assets/75795249/077b6bab-e193-4d3c-bb1a-e5c72b1bf392)
+
+
 
 
 
@@ -21,12 +24,16 @@ Video: https://youtu.be/PVrgNuXmDBo
 # Description of the project
 The aim of the project we have created is to showcase an accurate simulation of different aspects of nature. This simulation of a natural environment is inhabited by different animals and shows how they move and interact in the wild. Animals such as birds, frogs, and snails can be seen and controlled using the UI in the scene.
 
+![image (2)](https://github.com/dav1nn/NatureAssignment/assets/75795249/397e5b56-ab95-4c60-98cc-f780cc32c59a)
+
+
 # Instructions for use
 * Left and right arrow keys to move camera
 * Right click on mouse for UI
   
   
-  
+![image (3)](https://github.com/dav1nn/NatureAssignment/assets/75795249/8c875cf3-8641-41aa-a775-394460054c07)
+
 
 
 # How it works
