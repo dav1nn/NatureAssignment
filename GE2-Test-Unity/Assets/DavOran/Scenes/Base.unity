@@ -18888,8 +18888,8 @@ MonoBehaviour:
   - {fileID: 1712128298}
   - {fileID: 1895768649}
   - {fileID: 1178375304}
-  lightSkybox: {fileID: 2100000, guid: efd1c33efd2d58340b88804268e6833f, type: 2}
-  darkSkybox: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+  lightSkybox: {fileID: 2100000, guid: 9aa8ed67591432941bb76f12eb23ff91, type: 2}
+  darkSkybox: {fileID: 2100000, guid: 135a7036ca1a07b4e9e162d80e6b6e77, type: 2}
 --- !u!4 &475851424
 Transform:
   m_ObjectHideFlags: 0
