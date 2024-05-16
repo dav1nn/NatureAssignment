@@ -41,6 +41,8 @@ The birds are boids, which model the flocking behavior of birds seen in nature. 
 
 # List of classes/assets in the project
 
+All our files/assets are found in the DavOran folder within the project
+
 | Class/asset | Source |
 |-----------|-----------|
 | Boid.cs|Self written|
