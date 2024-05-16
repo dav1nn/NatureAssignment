@@ -3,12 +3,12 @@ using System.Collections;
 
 public class FrogController : MonoBehaviour
 {
-    public Transform[] lilyPads; 
-    public float jumpHeight = 2f; 
-    public float jumpDuration = 1f; 
+    public Transform[] lilyPads;
+    public float jumpHeight = 2f;
+    public float jumpDuration = 1f;
 
     private int currentLilyPadIndex = 0;
-    private float frogHeightOffset; 
+    private float frogHeightOffset;
 
     void Start()
     {
@@ -28,6 +28,9 @@ public class FrogController : MonoBehaviour
             targetPosition.y += frogHeightOffset;
             float elapsedTime = 0f;
 
+            Vector3 direction = (targetPosition - startPosition).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
             while (elapsedTime < jumpDuration)
             {
                 float t = elapsedTime / jumpDuration;
@@ -35,11 +38,14 @@ public class FrogController : MonoBehaviour
                 nextPosition.y += jumpHeight * Mathf.Sin(Mathf.PI * t);
                 transform.position = nextPosition;
 
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, t);
+
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
             transform.position = targetPosition;
+            transform.rotation = targetRotation;
 
             yield return new WaitForSeconds(1f);
         }
