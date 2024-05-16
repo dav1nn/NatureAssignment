@@ -55,6 +55,14 @@ The birds are boids, which model the flocking behavior of birds seen in nature. 
 
 
 
+https://github.com/dav1nn/NatureAssignment/assets/95291795/3efaca02-ed1d-4d40-acfc-ad1b817c7683
+
+
+
+https://github.com/dav1nn/NatureAssignment/assets/95291795/9422e4fd-f6ca-4e9a-971d-564e8bb9f24d
+
+
+
 # What we are most proud of in the assignment
 We are both very proud of how this assignment has turned out, particularly in terms of its visual appeal and how it simulates nature, achieving realistic behaviors in the three animals: birds, frogs, and snails. The immersive environment we created accurately simulates how different life forms function in nature. We are proud of the realistic movements each animal displays and how immersive the scene looks and feels with the moving and changing environment. Being able to change the environment and the animals behaviors adds to the user's immersion, and it's something we are really proud of.
 
