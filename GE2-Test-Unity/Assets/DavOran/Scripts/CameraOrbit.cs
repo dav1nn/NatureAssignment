@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class CameraOrbit : MonoBehaviour
 {
-    public Transform target;  
-    public float distance = 10.0f;  
-    public float speed = 50.0f; 
+    public Transform target;
+    public float distance = 10.0f;
+    public float speed = 50.0f;
 
     private float currentAngle;
 
@@ -12,7 +12,7 @@ public class CameraOrbit : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogError("Target not set for CameraOrbit script.");
+            Debug.LogError("Target not set.");
             return;
         }
 
@@ -24,11 +24,11 @@ public class CameraOrbit : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             currentAngle -= speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             currentAngle += speed * Time.deltaTime;
         }
