@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class LightIntensityController : MonoBehaviour
 {
-    public Light directionalLight; 
-     public Slider intensitySlider;  
-      public Light[] additionalLights; 
+    public Light directionalLight;
+    public Slider intensitySlider;
+    public Light[] additionalLights;
+
+    public Material lightSkybox;
+    public Material darkSkybox;
 
     void Start()
     {
-        
         if (intensitySlider != null && directionalLight != null)
         {
             intensitySlider.value = directionalLight.intensity;
-            intensitySlider.onValueChanged.AddListener(UpdateLightSettings);
+            intensitySlider.onValueChanged.AddListener(UpdateLightAndSkybox);
         }
 
         UpdateAdditionalLights(intensitySlider.value);
+        UpdateSkybox(intensitySlider.value);
     }
 
-    public void UpdateLightSettings(float value)
+    public void UpdateLightAndSkybox(float value)
     {
         if (directionalLight != null)
         {
@@ -29,6 +32,7 @@ public class LightIntensityController : MonoBehaviour
         }
 
         UpdateAdditionalLights(value);
+        UpdateSkybox(value);
     }
 
     private void UpdateAdditionalLights(float sliderValue)
@@ -40,6 +44,18 @@ public class LightIntensityController : MonoBehaviour
             light.enabled = turnOn;
         }
     }
+
+    private void UpdateSkybox(float sliderValue)
+    {
+        if (sliderValue < 0.5f)
+        {
+            RenderSettings.skybox = darkSkybox;
+        }
+        else
+        {
+            RenderSettings.skybox = lightSkybox;
+        }
+
+        DynamicGI.UpdateEnvironment();
+    }
 }
-
-

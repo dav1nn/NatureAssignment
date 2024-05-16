@@ -18754,7 +18754,8 @@ MonoBehaviour:
   - {fileID: 1712128298}
   - {fileID: 1895768649}
   - {fileID: 1178375304}
-  - {fileID: 0}
+  lightSkybox: {fileID: 2100000, guid: efd1c33efd2d58340b88804268e6833f, type: 2}
+  darkSkybox: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
 --- !u!4 &475851424
 Transform:
   m_ObjectHideFlags: 0
@@ -23695,7 +23696,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
